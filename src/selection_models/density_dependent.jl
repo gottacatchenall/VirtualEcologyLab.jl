@@ -1,0 +1,1 @@
+struct DensityDependentSelection <: AbstractSelectionModel end

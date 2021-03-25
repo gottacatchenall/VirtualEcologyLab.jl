@@ -1,0 +1,4 @@
+name = "VirtualEcologicalLaboratory"
+uuid = "de702101-8788-42bc-9508-b66cc959d566"
+authors = ["michael catchen <michael.catchen@colorado.edu>"]
+version = "0.1.0"

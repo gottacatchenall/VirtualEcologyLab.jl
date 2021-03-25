@@ -1,0 +1,1 @@
+struct DiffusionDispersal <: AbstractDispersalModel end
