@@ -7,8 +7,8 @@ module VirtualEcologicalLaboratory
     export DiffusionDispersal
     export DensityDependentSelection
 
-    include("types/abstractdynamics.jl")
-    include("types/checktypes.jl")
+    include("abstracttypes.jl")
+    include("interfaces/combinemodels.jl")
 
     include("dispersal_models/diffusion.jl")
     include("drift_models/brownian_motion.jl")

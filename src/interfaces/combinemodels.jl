@@ -1,3 +1,13 @@
+struct ModelAssemblage 
+    models::AbstractVector{AbstractDynamicsModel}
+end 
+
+Base.:+(a::Union{AbstractDynamicsModel, ModelAssemblage}, b::Union{AbstractDynamicsModel, ModelAssemblage}) = combinemodels(a, b)
+
+function combinemodels(a::AbstractDynamicsModel, b::AbstractDynamicsModel) 
+    checktypes(a,b) && ModelAssemblage([a,b])
+end
+
 checktypes(a::T,b::U) where {T <: AbstractDynamicsModel, U <: ModelAssemblage} = checktypes(b,a)
 function checktypes(a::T,b::U) where {T <: ModelAssemblage, U <: AbstractDynamicsModel}
     # is either T or U contianed within the assemablage T/U
@@ -17,4 +27,3 @@ function checktypes(a::T,b::U) where {T <: AbstractDynamicsModel, U <: AbstractD
     end
     return true
 end
-
