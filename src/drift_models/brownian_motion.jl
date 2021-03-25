@@ -1,1 +1,0 @@
-struct BrownianMotion <: AbstractDriftModel end
