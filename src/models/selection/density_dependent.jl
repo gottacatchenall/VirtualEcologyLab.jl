@@ -1,1 +1,2 @@
-struct DensityDependentSelection <: AbstractSelectionModel end
+struct DensityDependentSelection{T <: AbstractObservationType} <: AbstractSelectionModel 
+end

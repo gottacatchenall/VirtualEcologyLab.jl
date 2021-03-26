@@ -1,0 +1,2 @@
+struct StochasticColonization <: AbstractDynamicsModel
+end

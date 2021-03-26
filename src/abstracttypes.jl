@@ -8,7 +8,11 @@ abstract type AbstractObservationType end
 
 
 abstract type AbstractLandscape end 
-
+abstract type AbstractLocationSetGenerator end
+abstract type AbstractEnvironmentalVariable end
+abstract type AbstractEnvironmentalObservationGenerator end 
 
 abstract type AbstractState end
 abstract type AbstractTrajectory end
+
+abstract type AbstractMetaweb end

@@ -1,3 +1,3 @@
-struct BrownianMotion{T} <: AbstractDriftModel
-    
+struct BrownianMotion{T <: AbstractObservationType} <: AbstractDriftModel
+
 end

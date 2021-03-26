@@ -1,0 +1,2 @@
+struct StochasticExtinction <: AbstractDynamicsModel
+end
