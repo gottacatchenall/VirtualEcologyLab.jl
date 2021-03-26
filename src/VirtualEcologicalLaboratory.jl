@@ -3,7 +3,17 @@ module VirtualEcologicalLaboratory
     using Distributions: Distribution, Uniform, Exponential, Normal
 
     export AbstractDynamicsModel
-    export AbstractDispersalModel, AbstractSelectionModel, AbstractDriftModel
+
+    export AbstractDispersalModel
+    export DiffusionDispersal, StochasticColonization
+
+    export AbstractSelectionModel
+    export DensityDependentSelection
+
+    export AbstractDriftModel
+    export BrownianMotion, StochasticExtinction
+
+    export Trajectory
 
     export AbstractMetaweb
     export SingleSpecies, NicheModel
@@ -19,11 +29,6 @@ module VirtualEcologicalLaboratory
     export AbstractEnvironmentalVariable
     export StaticEnvironmentalVariable, EnvironmentalObservation
 
-    export BrownianMotion
-    export DiffusionDispersal
-    export DensityDependentSelection
-    export Trajectory
-
     export generate 
     export simulate
 
@@ -34,11 +39,10 @@ module VirtualEcologicalLaboratory
     include("metawebs/metaweb.jl")
 
     include("models/dispersal/diffusion.jl")
-    include("models/dispersal/density_dependent.jl")
+    include("models/dispersal/colonization.jl")
 
     include("models/drift/brownian_motion.jl")
-    include("models/selection/density_dependent.jl")
-
+    include("models/drift/extinction.jl")
 
     include("models/selection/density_dependent.jl")
 
