@@ -1,5 +1,5 @@
 using VirtualEcologicalLaboratory
-using Distribution: Expontential
+using Distributions: Exponential
 
 
 numpopulations = 30
@@ -12,7 +12,7 @@ landscape = Landscape(populations, areas)
 
 metaweb = SingleSpecies()
 
-model = StochasticColonization(0.3) + StochasticExtinction(0.1)
+model = (landscape) -> StochasticColonization(0.3) + StochasticExtinction(0.1)
 
 traj = Trajectory()
 

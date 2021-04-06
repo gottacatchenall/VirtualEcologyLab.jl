@@ -7,7 +7,7 @@ struct EnvironmentalObservation <: AbstractObservationType
 end 
 
 
-function generate(::Type{StaticEnvironmentalVariable}, ls::LocationSet, dist::Distribution)
+function generate(::Type{StaticEnvironmentalVariable}, ls::AbstractLocationSet, dist::Distribution)
     obs = [EnvironmentalObservation(rand(dist)) for p in 1:sizeof(ls)]
     sev = StaticEnvironmentalVariable(obs)
     return sev

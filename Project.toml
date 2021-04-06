@@ -4,4 +4,6 @@ authors = ["michael catchen <michael.catchen@colorado.edu>"]
 version = "0.0.1"
 
 [deps]
+BenchmarkTools = "6e4b80f9-dd63-53aa-95a3-0cdb28fa8baf"
 Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
+Simulation = "ed2dc23b-ada4-5fdb-a26f-56368a14ad8f"

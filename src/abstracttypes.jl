@@ -8,6 +8,7 @@ abstract type AbstractObservationType end
 
 
 abstract type AbstractLandscape end 
+abstract type AbstractLocationSet end 
 abstract type AbstractLocationSetGenerator end
 abstract type AbstractEnvironmentalVariable end
 abstract type AbstractEnvironmentalObservationGenerator end 

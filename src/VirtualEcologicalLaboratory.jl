@@ -23,11 +23,14 @@ module VirtualEcologicalLaboratory
     export AbstractObserver
 
     export AbstractLandscape
+    export AbstractLocationSet
+    export Landscape
     export Location, LocationSet, LocationSetGenerator 
     export PoissonProcess
     
     export AbstractEnvironmentalVariable
     export StaticEnvironmentalVariable, EnvironmentalObservation
+
 
     export generate 
     export simulate
@@ -51,6 +54,7 @@ module VirtualEcologicalLaboratory
     include("observers/trait_observers.jl")
 
     include("landscapes/landscape.jl")
+    include("landscapes/locations.jl")
     include("landscapes/environment.jl")
 
 
