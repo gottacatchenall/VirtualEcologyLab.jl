@@ -1,5 +1,6 @@
 abstract type AbstractDynamicsModel end
-abstract type AbstractDispersalModel <: AbstractDynamicsModel end
+abstract type AbstractMovementModel end
+
 abstract type AbstractSelectionModel <: AbstractDynamicsModel end
 abstract type AbstractDriftModel <: AbstractDynamicsModel end
 
