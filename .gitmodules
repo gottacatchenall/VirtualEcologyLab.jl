@@ -1,0 +1,3 @@
+[submodule "deps/EcoSISTEM.jl"]
+	path = deps/EcoSISTEM.jl
+	url = https://github.com/boydorr/EcoSISTEM.jl

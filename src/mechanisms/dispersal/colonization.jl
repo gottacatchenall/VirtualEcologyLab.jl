@@ -1,10 +1,6 @@
 struct StochasticColonization <: AbstractDynamicsModel
     C::Float64
-    M::Matrix{Float64,2}
 end
-
-StochasticColonization(C::Float64, old_state)
-
 
 function simulate(model::StochasticColonization, landscape::AbstractLandscape, old_state::AbstractDynamicsState, new_state::AbstractDynamicsState)
     locs = locations(old_state)

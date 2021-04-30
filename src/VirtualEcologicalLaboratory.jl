@@ -1,5 +1,5 @@
 module VirtualEcologicalLaboratory
-
+    using EcoSISTEM
     using Distributions: Distribution, Uniform, Exponential, Normal
 
     export AbstractDynamicsModel
@@ -41,13 +41,15 @@ module VirtualEcologicalLaboratory
 
     include("metawebs/metaweb.jl")
 
-    include("models/dispersal/diffusion.jl")
-    include("models/dispersal/colonization.jl")
+    include("mechanisms/dispersal/colonization.jl")
+    include("mechanisms/dispersal/movement.jl")
 
-    include("models/drift/brownian_motion.jl")
-    include("models/drift/extinction.jl")
+    include("mechanisms/drift/brownian_motion.jl")
+    include("mechanisms/drift/extinction.jl")
 
-    include("models/selection/density_dependent.jl")
+    include("mechanisms/selection/density_dependent.jl")
+    include("mechanisms/selection/directional.jl")
+    include("mechanisms/selection/disruptive.jl")
 
     include("observers/abundance_observers.jl")
     include("observers/occupancy_observers.jl")
