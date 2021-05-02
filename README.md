@@ -10,7 +10,7 @@ based on five fundemental mechanisms (derived from  [Vellend 2010](todo) and the
 The mechanisms are 
 1. Selection
 2. Drift
-3. Dispersa
+3. Dispersal
 4. Mutation
 5. Speciation
 
