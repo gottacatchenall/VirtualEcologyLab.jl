@@ -2,8 +2,8 @@ struct StaticEnvironmentalVariable{T} <: AbstractEnvironmentalVariable
     values::Array{T}
 end
 
-struct EnvironmentalObservation <: AbstractObservationType 
-    values::Union{T, V} where { T <: Number, V <: AbstractArray }
+struct EnvironmentalObservation <: AbstractMeasurement 
+    values::Union{T, V} where { T <: Float64, V <: AbstractArray }
 end 
 
 

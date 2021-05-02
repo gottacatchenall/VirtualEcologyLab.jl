@@ -1,7 +1,3 @@
-function simulate(
-    models::ModelAssemblage,
-    landscape::AbstractLandscape)
+function simulate(ves::VirtualEcosystem)
     
-    
-
 end

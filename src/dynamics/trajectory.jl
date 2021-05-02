@@ -1,9 +1,9 @@
-struct Trajectory{OT <: AbstractObservationType}
+struct Trajectory{OT <: AbstractMeasurement}
     tensor::Array{OT, 3}
 end
 
-Base.getindex(t::Trajectory{N}, a::Any, b::Any, c::Any) where {N <: AbstractObservationType} = Base.getindex(t.tensor, a,b,c)
-obstype(t::Trajectory{N}) where {N <: AbstractObservationType} = N
+Base.getindex(t::Trajectory{N}, a::Any, b::Any, c::Any) where {N <: AbstractMeasurement} = Base.getindex(t.tensor, a,b,c)
+obstype(t::Trajectory{N}) where {N <: AbstractMeasurement} = N
 
 species(t::Trajectory) = t[1:length(t[:,1,1]), :, :]
 locations(t::Trajectory) = t[:,1:length(t[1,:,1]), :]
