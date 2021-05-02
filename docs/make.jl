@@ -1,9 +1,9 @@
-using Documenter, VirtualEcologicalLaboratory
+using Documenter, VirtualEcologyLab
 
 makedocs(
     sitename="VirtualEcologyLab.jl",
     authors="Michael Catchen",
-    modules=[MetacommunityDynamics],
+    modules=[VirtualEcologyLab],
     pages=[
         "Index" => "index.md",
         ]
