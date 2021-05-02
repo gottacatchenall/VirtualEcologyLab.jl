@@ -11,7 +11,7 @@ makedocs(
 
 deploydocs(
     deps=Deps.pip("pygments", "python-markdown-math"),
-    repo="github.com/gottacatchenall/VirtualEcologicalLaboratory.jl.git",
+    repo="github.com/gottacatchenall/VirtualEcologyLab.jl.git",
     devbranch="main",
     push_preview=true
 )
