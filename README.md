@@ -32,9 +32,11 @@ can be written down. Within `VEL`, measurements are split into two types:
 `Biotic` measurements correspond to things measuremed about living things. At
 the moment, the types of `Biotic` measurements are:
 
-- `Biomass` (represented as a `Float64`) `Abundance` (an `Int`) `Occupancy` (a
-  `Bool`) `ContinuousTrait` (a `Float64`) `DiscreteTrait` (a set of `symbols`
-  that form a dictionary)
+- `Biomass` (represented as a `Float64`)
+- `Abundance` (an `Int`)
+- `Occupancy` (a `Bool`)
+- `ContinuousTrait` (a `Float64`)
+- `DiscreteTrait` (a set of `symbols` that form a dictionary)
 
 `Abiotic` measurements correspond to the environmental conditions at a
 particular location. The two broad categories of `Abiotic` measurements are
@@ -45,10 +47,11 @@ particular location. The two broad categories of `Abiotic` measurements are
 
 A **state** is set of **measurements** that describes an ecological system.
 
-- `SingletonState`: A measurement corresponding to a single species at a single
-  location and time. (For 1D measurements, a scalar) `MetapopulationState`: A
-  measurement corresponding to a single species across spatial locations. (For
-  1D measurements, a vector) `MetacommunityState`: (For 1D measurements, a
+- `SingletonState`: A measurement corresponding to a single species at a single location and time. (For 1D measurements, a scalar)
+- `MetapopulationState`: A measurement corresponding to a single species across spatial locations. (For
+  1D measurements, a vector)
+- `CommunityState`: A measurement corresponding to a set of species in one location (For 1D measurements, a vector)
+- `MetacommunityState`: A measurement corresponding to a set of species across spatial locations (For 1D measurements, a
   matrix)
 
 States of different types of measurements can be combined to create
