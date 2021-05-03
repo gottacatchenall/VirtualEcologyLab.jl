@@ -105,7 +105,8 @@ dispatch on
 `simulate!(mech::AbstractMechanism, oldstate::State, newstate::State)`
 
 
-It is unique in its dispatch patterns because it involves changing the metaweb, and recomputing parameters used in other mechanisms because of this.
+Note that *Speciation* models are unique in its dispatch patterns because it involves changing the metaweb, and therefore the allocation for `new_state` must be changed because it has a different number of species.
+This causes general problems. Wrap anything with a speciation model in a larger tensor with a MAX_SPECIES param? Who knows.
 
 
 ### Combining mechanisms
