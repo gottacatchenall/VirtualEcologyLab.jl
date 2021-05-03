@@ -74,7 +74,7 @@ speciation.
 - **Drift** describes a mechanism that alters a `BioticMeasurement` stochastically.
 - **Dispersal** describes a mechanism that alters a `BioticMeasurement` across multiple locations due to individuals of a `Species` reproducing in a different location than where they were born. Depending on the measurement the "conservation of mass" rule is different. Some dispersal models (e.g. Levins/Hanski metapopulation models)  do not enforce "conservation of mass" when species move across space. Some do. We enable both. 
 - **Mutation** specifically relates to `Trait` measurement developing a novel value due to a random event.
-- **Speciation** specifically relates to the `Trait` measurement for a specific state where, for a given species emboidying a value of traits across spatial locations, the `Speciation` mechanism determines these entitites become discrete entities in the `Metaweb` across space (see metaweb).
+- **Speciation** specifically relates to a `Trait` measuremeny where, for a given species emboidying a value of traits across spatial locations, the `Speciation` mechanism determines these entitites become discrete entities in the `Metaweb` (see metaweb).
 
 
 ### Defining mechanisms and dispatch
