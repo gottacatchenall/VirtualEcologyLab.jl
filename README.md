@@ -66,7 +66,8 @@ simulate!(model, metaweb, landscape, traj)
 
 ```
 
-It would noet be difficult to extend this to allow the mass of each species to change over time due to `Mutation`, both effecting the functional response dynamics, and eventually leading to `Speciation` if the distribution of masses for a single species splits. 
+Within the toolkit, it would not be exceedingly difficult to extend this
+model to allow the mass of each species to evolve over time due to `Mutation`, `Selection` or `Drift`, both effecting the functional response dynamics, and eventually leading to `Speciation` if the distribution of masses for a single species splits. 
 
 
 
