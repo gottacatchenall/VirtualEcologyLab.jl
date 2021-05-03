@@ -1,9 +1,11 @@
 # VirtualEcologyLab.jl
 
 [`VirtualEcologyLab.jl`](https://gottacatchenall.github.io/VirtualEcologyLab.jl/dev/)
-is a Julia library for creating virtual ecological and evolutionary experiments
-that act as a "virtual laboratory" (Grimm & Railsback 2005).  VEL.jl implements
-a system for modeling ecosystems based on five fundemental mechanisms:
+is a Julia library for simulating ecological and evolutionary experiments.
+`VEL.jl` aims to create a  "virtual laboratory" (Grimm & Railsback 2005) for ecological
+and evolutionary processes.
+
+`VEL.jl` composes models based on five mechanisms:
 `Selection`, `Drift`, `Dispersal`, `Mutation`, and `Speciation`. These
 mechanisms can operate on different types of measurements (`Biomass`,
 `Abundance`, `Occupancy`, `ContinuousTrait`, `DiscreteTrait`), and be combined
