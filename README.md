@@ -4,7 +4,7 @@
 ecological and evolutionary experiments that act as a "virtual laboratory" (Grimm & Railsback 2005). 
 VEL.jl implements a system for modeling ecosystems
 based on five fundemental mechanisms: `Selection`, `Drift`, `Dispersal`, `Mutation`, and `Speciation`.
-These mechanisms can operate on different types of measurements (`Biomass`, `Abundance`, `Occupancy`, `ContinuousTrait`, `DiscreteTrait`), and be combined to create arbitrarily complex systems of ecological and evolutionary dynamics using few lines of code (see [the example](##example))
+These mechanisms can operate on different types of measurements (`Biomass`, `Abundance`, `Occupancy`, `ContinuousTrait`, `DiscreteTrait`), and be combined to create arbitrarily complex systems of ecological and evolutionary dynamics using few lines of code (see [the example](#example))
 
 `VEL.jl` is part of [EcoJulia](https://github.com/EcoJulia), and has interfaces to other packages in the EcoJulia ecosystem (EcologicalNetworks.jl, SpatialEcology.jl, Diversity.jl) and uses [`EcoSISTEM.jl`](https://github.com/boydorr/EcoSISTEM.jl) as a simulation engine for scalable parallelized simulation.
 
