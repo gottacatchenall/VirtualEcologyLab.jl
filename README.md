@@ -22,28 +22,46 @@ These mechanisms can operate on different types of measurements Each of the five
 - Continuous trait (a `Float64`)
 - Discrete trait (a set of `symbols` that form a dictionary)
 
+Further, these mechanisms can change as a function of other non-biotic observations, included in the types `StaticEnvironmentMeasurement` and `DynamicEnvironmentMeasurement`.
+
+
+From this, arbitrarily complex models can 
+be composed and run using short amounts 
+of code. 
+
 
 ## Example: 
 
-In this short example we create a system of `Occupancy` dynamics that follows Hanski 1994's incidence-function model. We do this by combining a `Drift` model (`RandomExtinction`) with a `Dispersal` model `IncidenceFunctionColonization`. 
+In this short example we simlate the `Biomass` dynamics of a food-web with an allometric scaling functional response across 30 locations with dispersal between them, with dispersal distance also scaling with allometry. We then add a `Drift` model of local demographic stochasticity in the form of density dependent Brownian motion (i.e. the $\sigma$ of the noise process is scaled by the biomass at that location and time). This highlights that even a model with 3 moderately complex components can be built with 10-15 lines of code using `VEL.jl`.
 
 ```
-using VirtualEcologyLab
+using VirtualEcologicalLaboratory
 using Distributions: Exponential
 
-numpopulations = 30
-meanarea = 3
+using EcologicalNetworks: nichemodel, trophiclevels
 
+# set up species
+numspecies = 30
+meanconnectance = 0.15
+metaweb = nichemodel(0.15)
+trophiclevs = trophiclevels(metaweb)
+masses = [generate(StaticSpeciesTrait, s, 10^(trophiclevs[s])) for s in species(metaweb) ] 
+
+# setup locations
+numpopulations = 50
 populations = generate(PoissonProcess, numpopulations) 
-areas = generate(StaticEnvironmentalVariable, populations, Exponential(meanarea))
 
-landscape = Landscape(populations, [areas])
-metaweb = SingleSpecies()
+# setup model 
+model = Eating(functional_response=YodzisInnes(masses)) +   # density dependent biotic selection
+        DiffusionDispersal(ibd=AllometricIBD(masses)) +     # allometric scaling dispersa distance
+        DensityDependentBrownianMotion(0.3)                 # density dependent drift 
 
-model = (landscape) -> IncidenceFunctionColonization(0.3, areas) + RandomExtinction(0.1)
+# memory allocation 
+ntimesteps = 500
+traj = Trajectory(Biomass, metaweb, landscape, ntimesteps)
 
-traj = Trajectory(Occupancy, metaweb, landscape)
 simulate!(model, metaweb, landscape, traj)
+
 ```
 
 
