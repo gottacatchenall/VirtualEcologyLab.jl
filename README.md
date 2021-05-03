@@ -54,10 +54,9 @@ A **state** is set of **measurements** that describes an ecological system.
 - `MetacommunityState`: A measurement corresponding to a set of species across spatial locations (For 1D measurements, a
   matrix)
 
-States of different types of measurements can be combined to create
-`StateAssemblage`, which is necessesary if for exampleone wanted to build a
-model where the `Abundance` of species changes as a function of some species
-`Trait`.
+States of different types of measurements can be grouped to create
+`StateAssemblage`. For example, this is necessesary to build a
+mechanism that effects the `Abundance` of species changes as a function of some species`Trait`.
 
 ## Mechanisms
 
@@ -95,7 +94,8 @@ speciation.
 
 #### `Speciation`
 
-**Speciation** specifically relates to `Trait` measurements across space
+**Speciation** specifically relates to `Trait` measurements across space.
+
 
 ### Defining mechanisms and dispatch
 
@@ -103,6 +103,10 @@ The form in which any individual `::AbstractMechanism` acts on a `State` is via
 dispatch on
 
 `simulate!(mech::AbstractMechanism, oldstate::State, newstate::State)`
+
+
+It is unique in its dispatch patterns because it involves changing the metaweb, and recomputing parameters used in other mechanisms because of this.
+
 
 ### Combining mechanisms
 
