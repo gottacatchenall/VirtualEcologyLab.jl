@@ -15,8 +15,9 @@ numpopulations = 50
 populations = generate(PoissonProcess, numpopulations) 
 
 # setup model 
-# Eating is a mechanism of type AbstractBioticSelectionModel, DiffusionDispersa is of AbstractDispersalModel
-model = Eating(functional_response=YodzisInnes(masses)) + DiffusionDispersal(ibd_strength=AllometricIBD(masses))
+# Eating is a mechanism of type AbstractBioticSelectionModel, DiffusionDispersal is of AbstractDispersalModel
+model = Eating(functional_response=YodzisInnes(masses)) +
+        DiffusionDispersal(ibd=AllometricIBD(masses))
 
 # memory allocation 
 ntimesteps = 500
