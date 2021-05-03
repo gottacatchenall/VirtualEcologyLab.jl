@@ -72,6 +72,9 @@ struct MetacommunityState{T <: AbstractMeasurement} <: AbstractState
     state::Matrix{T}
 end 
 
+abstract type AbstractStateBundle end # set of multiple states (i.e. biomass and a trait value), which are used together for a given model 
+
+
 abstract type AbstractTrajectory end
 
 
