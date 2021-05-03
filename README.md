@@ -49,7 +49,7 @@ A **mechanism** describes how a **state** of a system
 changes from one time-step to the next. 
 
 Within `VEL`, mechanisms are divided in to **5** categories 
-(derived from  [Vellend 2010](todo) and the established "big 4" from the from evolutionary genetics):
+(derived from  [Vellend 2010](http://www.dx.doi.org/10.1086/652373) and the established "big 4" from the from evolutionary genetics):
 
 - `Selection` 
 - `Drift`
