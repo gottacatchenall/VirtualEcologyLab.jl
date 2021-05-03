@@ -32,7 +32,9 @@ of code.
 
 ## Example: 
 
-In this short example we simlate the `Biomass` dynamics of a food-web with a `Selection` in the form of allometric scaling functional response. We create a landscape with 30 locations with `Dispersal` between them, with dispersal distance also scaling with allometry. We then add a `Drift` model of local demographic stochasticity in the form of density dependent Brownian motion (i.e. the $\sigma$ of the noise process is scaled by the biomass at that location and time). This highlights that even a model with 3 moderately complex components can be built with 10-15 lines of code using `VEL.jl`.
+In this short example we simlate the `Biomass` dynamics of a food-web with a `Selection` in the form of allometric scaling functional response. We create a landscape with 30 locations with `Dispersal` between them, with dispersal distance also scaling with allometry. We then add a `Drift` model of local demographic stochasticity in the form of density dependent Brownian motion (i.e. the $\sigma$ of the noise process is scaled by the biomass at that location and time). This highlights that even a model with 3 moderately complex components can be built with 10-15 lines of code using `VEL.jl`.  
+
+
 
 ```
 using VirtualEcologicalLaboratory
@@ -64,7 +66,7 @@ simulate!(model, metaweb, landscape, traj)
 
 ```
 
-
+It would noet be difficult to extend this to allow the mass of each species to change over time due to `Mutation`, both effecting the functional response dynamics, and eventually leading to `Speciation` if the distribution of masses for a single species splits. 
 
 
 
