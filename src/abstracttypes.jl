@@ -21,25 +21,38 @@ abstract type AbstractAbioticSelectionModel <: AbstractSelectionModel end
     Measurements
 """
 abstract type AbstractMeasurement end
-struct Occupancy <: AbstractMeasurement 
+
+abstract type AbstractBiomassMeasurement <: AbstractMeasurement end
+abstract type AbstractTraitMeasurement <: AbstractMeasurement end
+abstract type AbstractEnvironmentMeasurement <: AbstractMeasurement  end
+
+
+struct Occupancy <: AbstractBiomassMeasurement 
     state::Bool
 end 
 
-struct Abundance <: AbstractMeasurement 
+struct Abundance <: AbstractBiomassMeasurement 
     state::Int64
 end 
 
-struct Biomass <: AbstractMeasurement 
+struct Biomass <: AbstractBiomassMeasurement 
     state::Float64
 end 
-
-struct ContinuousTrait <: AbstractMeasurement
-    val::Float64
-end
 Base.zero(::Type{Biomass}) = Biomass(0.)
-Base.zero(::Type{ContinuousTrait}) = ContinuousTrait(0.)
 Base.zero(::Type{Occupancy}) = Occupancy(0)
 Base.zero(::Type{Abundance}) = Abundance(0)
+
+
+struct DiscreteTrait <: AbstractTraitMeasurement
+    val::Int64
+    labels::Vector{String}
+end
+Base.zero(::Type{DiscreteTrait}) = DiscreteTrait(0, ["A"])
+
+struct ContinuousTrait <: AbstractTraitMeasurement
+    val::Float64
+end
+Base.zero(::Type{ContinuousTrait}) = ContinuousTrait(0.)
 
 
 """

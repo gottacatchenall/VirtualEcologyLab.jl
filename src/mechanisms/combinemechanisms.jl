@@ -1,10 +1,12 @@
-struct ModelAssemblage 
-    models::AbstractVector{AbstractDynamicsModel}
+struct ModelAssemblage{MT <: AbstractMeasurement}
+    models::AbstractVector{AbstractModel{MT}}
 end 
 
-Base.:+(a::Union{AbstractDynamicsModel, ModelAssemblage}, b::Union{AbstractDynamicsModel, ModelAssemblage}) = combinemodels(a, b)
+Base.:+(a::ModelAssemblage, b::ModelAssemblage) = combine(a, b)
 
-function combinemodels(a::AbstractDynamicsModel, b::AbstractDynamicsModel) 
+Base.:+(a::Union{AbstractDynamicsModel, ModelAssemblage}, b::Union{AbstractDynamicsModel, ModelAssemblage}) = combine(a, b)
+
+function combine(a::AbstractDynamicsModel, b::AbstractDynamicsModel) 
     checktypes(a,b) && ModelAssemblage([a,b])
 end
 

@@ -1,4 +1,4 @@
-struct DiffusionDispersal{T <: AbstractObservationType} <: AbstractMovementModel 
+struct BrownianMotion{T <: AbstractObservationType} <: AbstractMovementModel 
     DiffusionDispersal(obstype::Type) = new{obstype}()
 end
 
