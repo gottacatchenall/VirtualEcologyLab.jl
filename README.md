@@ -4,14 +4,13 @@
 ecological and evolutionary experiments that act as a "virtual laboratory" (Grimm & Railsback 2005). 
 VEL.jl implements a system for modeling ecosystems
 based on five fundemental mechanisms: `Selection`, `Drift`, `Dispersal`, `Mutation`, and `Speciation`.
-
 These mechanisms can operate on different types of measurements (`Biomass`, `Abundance`, `Occupancy`, `ContinuousTrait`, `DiscreteTrait`), and be combined to create arbitrarily complex systems of ecological and evolutionary dynamics using few lines of code (see [the example](##example))
 
 `VEL.jl` is part of [EcoJulia](https://github.com/EcoJulia), and has interfaces to other packages in the EcoJulia ecosystem (EcologicalNetworks.jl, SpatialEcology.jl, Diversity.jl) and uses [`EcoSISTEM.jl`](https://github.com/boydorr/EcoSISTEM.jl) as a simulation engine for scalable parallelized simulation.
 
 `VEL.jl` is currently in alpha and will have a tagged `v0.1` release when fully functional. 
 
-## Primer 
+# Primer 
 
 This is a quick primer on how the software is designed.
 
@@ -71,7 +70,7 @@ A trajectory (or trajectory assemblage) is a set of states.
 VEL enables creating observers which sample from the virtual system
 across given spatial and temporal patterns, and which can simulate observation error.  
 
-## Example: 
+# Example: 
 
 In this short example we simlate the `Biomass` dynamics of a food-web with a `Selection` in the form of allometric scaling functional response. We create a landscape with 30 locations with `Dispersal` between them, with dispersal distance also scaling with allometry. We then add a `Drift` model of local demographic stochasticity in the form of density dependent Brownian motion (i.e. the $\sigma$ of the noise process is scaled by the biomass at that location and time). This highlights that even a model with 3 moderately complex components can be built with 10-15 lines of code using `VEL.jl`.  
 
