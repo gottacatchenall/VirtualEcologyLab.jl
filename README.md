@@ -70,31 +70,11 @@ speciation.
 
 ### Types of mechanisms
 
-#### `Selection`
-
-**Selection** describes a mechanism that alters a `BioticMeausrement` as a
-*function of an `AbioticMeasurement` (in `AbioticSelection` mechanisms), or a
-*mechanism that alters a `BioticMeasurement` as a function of another
-*`BioticMeasurement` (in `BioticSelection`).
-
-#### `Drift`
-
-**Drift** describes a mechanism that alters a `BioticMeasurement`
-*stochastically.
-
-#### `Dispersal`
-
-**Dispersal** describes a mechanism that alters a `BioticMeasurement` across
-*multiple locations. Depending on the measurement the "conservation of mass"
-*rule is different.   
-
-#### `Mutation`
-
-**Mutation** specifically relates to `Trait` measurements locally
-
-#### `Speciation`
-
-**Speciation** specifically relates to `Trait` measurements across space.
+- **Selection** describes a mechanism that alters a `BioticMeasurement`. This occurs in two ways: 1) `AbioticSelection`: where a `BioticMeasurement` changes as a function of an `AbioticMeasurement`, or 2) `BioticSelection`, where a `BioticMeasurement` changes as a function of another `BioticMeasurement`.
+- **Drift** describes a mechanism that alters a `BioticMeasurement` stochastically.
+- **Dispersal** describes a mechanism that alters a `BioticMeasurement` across multiple locations due to individuals of a `Species` reproducing in a different location than where they were born. Depending on the measurement the "conservation of mass" rule is different. Some dispersal models (e.g. Levins/Hanski metapopulation models)  do not enforce "conservation of mass" when species move across space. Some do. We enable both. 
+- **Mutation** specifically relates to `Trait` measurement developing a novel value due to a random event.
+- **Speciation** specifically relates to the `Trait` measurement for a specific state where, for a given species emboidying a value of traits across spatial locations, the `Speciation` mechanism determines these entitites become discrete entities in the `Metaweb` across space (see metaweb).
 
 
 ### Defining mechanisms and dispatch
@@ -105,8 +85,11 @@ dispatch on
 `simulate!(mech::AbstractMechanism, oldstate::State, newstate::State)`
 
 
-Note that *Speciation* models are unique in its dispatch patterns because it involves changing the metaweb, and therefore the allocation for `new_state` must be changed because it has a different number of species.
-This causes general problems. Wrap anything with a speciation model in a larger tensor with a MAX_SPECIES param? Who knows.
+Note that *Speciation* models are unique in its dispatch patterns because it
+involves changing the metaweb, and therefore the allocation for `new_state` must
+be changed because it has a different number of species. This causes general
+problems. Wrap anything with a speciation model in a larger tensor with a
+MAX_SPECIES param? Who knows.
 
 
 ### Combining mechanisms
