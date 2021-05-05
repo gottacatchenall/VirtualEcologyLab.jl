@@ -1,20 +1,3 @@
-"""
-
-    Mechanisms
-"""
-abstract type AbstractMechanism end
-abstract type AbstractGlobalMechanism <: AbstractMechanism end
-abstract type AbstractLocalMechanism <: AbstractMechanism end 
-
-abstract type AbstractDriftModel <: AbstractLocalMechanism end
-abstract type AbstractSpeciationModel <: AbstractGlobalMechanism end
-abstract type AbstractDispersalModel <: AbstractGlobalMechanism end
-abstract type AbstractMutationModel <: AbstractLocalMechanism end
-
-abstract type AbstractSelectionModel <: AbstractLocalMechanism end
-abstract type AbstractBioticSelectionModel <: AbstractSelectionModel end
-abstract type AbstractAbioticSelectionModel <: AbstractSelectionModel end
-
 
 """
 
@@ -28,19 +11,35 @@ abstract type AbstractEnvironmentMeasurement <: AbstractMeasurement  end
 
 
 struct Occupancy <: AbstractBiomassMeasurement 
-    state::Bool
 end 
+Base.zero(::Type{Occupancy}) = Occupancy(0)
 
 struct Abundance <: AbstractBiomassMeasurement 
-    state::Int64
 end 
+Base.zero(::Type{Abundance}) = Abundance(0)
 
 struct Biomass <: AbstractBiomassMeasurement 
-    state::Float64
 end 
 Base.zero(::Type{Biomass}) = Biomass(0.)
-Base.zero(::Type{Occupancy}) = Occupancy(0)
-Base.zero(::Type{Abundance}) = Abundance(0)
+
+
+
+"""
+
+    Mechanisms
+"""
+abstract type AbstractMechanism end
+abstract type AbstractGlobalMechanism <: AbstractMechanism end
+abstract type AbstractLocalMechanism <: AbstractMechanism end 
+
+abstract type AbstractDriftModel{T} <: AbstractLocalMechanism end
+abstract type AbstractSpeciationModel{T} <: AbstractGlobalMechanism end
+abstract type AbstractDispersalModel{T} <: AbstractGlobalMechanism end
+abstract type AbstractMutationModel{T} <: AbstractLocalMechanism end
+
+abstract type AbstractSelectionModel{T} <: AbstractLocalMechanism end
+abstract type AbstractBioticSelectionModel{T} <: AbstractSelectionModel{T} end
+abstract type AbstractAbioticSelectionModel{T} <: AbstractSelectionModel{T} end
 
 
 struct DiscreteTrait <: AbstractTraitMeasurement
@@ -55,27 +54,11 @@ end
 Base.zero(::Type{ContinuousTrait}) = ContinuousTrait(0.)
 
 
-"""
-
-    States
-"""
-abstract type AbstractState end
-struct SingletonState{T <: AbstractMeasurement} <: AbstractState
-    state::T
-end
-
-struct MetapopulationState{T <: AbstractMeasurement} <: AbstractState
-    state::Vector{T}
-end
-
-struct MetacommunityState{T <: AbstractMeasurement} <: AbstractState
-    state::Matrix{T}
+struct MechanismAssemblage
+    mechanisms::Vector{AbstractMechanism}
 end 
 
-abstract type AbstractStateBundle end # set of multiple states (i.e. biomass and a trait value), which are used together for a given model 
 
-
-abstract type AbstractTrajectory end
 
 
 
@@ -83,11 +66,19 @@ abstract type AbstractTrajectory end
 
     Landscapes
 """
+
 abstract type AbstractLandscape end 
 abstract type AbstractLocationSet end 
 abstract type AbstractLocationSetGenerator end
 abstract type AbstractEnvironmentalVariable end
 abstract type AbstractEnvironmentalObservationGenerator end 
+struct Location
+    coordinate::Vector{Float64}
+end
+    
+struct LocationSet <: AbstractLocationSet
+    locations::Vector{Location}
+end
 
 
 """
@@ -95,10 +86,39 @@ abstract type AbstractEnvironmentalObservationGenerator end
 """
 abstract type AbstractMetaweb end
 
+struct Species end 
 
-"""
-    VirtualEcosystem
-"""
-
-struct VirtualEcosystem
+struct SpeciesPool 
+    species::Vector{Species}
 end
+
+
+"""
+
+    States
+"""
+abstract type AbstractState end
+struct SingletonState{T <: AbstractMeasurement} <: AbstractState
+    state::T
+    species::Species
+    location::Location
+end
+
+struct MetapopulationState{T <: AbstractMeasurement} <: AbstractState
+    state::Vector{T}
+    location::Vector{Location}
+end
+
+struct CommunityState{T <: AbstractMeasurement} <: AbstractState
+    state::Vector{T}
+    species::Vector{Species}
+end
+
+struct MetacommunityState{T <: AbstractMeasurement} <: AbstractState
+    state::Matrix{T}
+end 
+
+abstract type AbstractStateBundle end # set of multiple states (i.e. biomass and a trait value), which are used together for a given model 
+abstract type AbstractTrajectory end
+
+

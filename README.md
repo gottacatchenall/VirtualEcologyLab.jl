@@ -111,8 +111,14 @@ spatial and temporal patterns, and which can simulate observation error.
 
 # Example:
 
-In this short example we simlate the `Biomass` dynamics of a food-web with a
-`Selection` in the form of allometric scaling functional response. We create a
+In this short example we simlate the `Biomass` dynamics of a food-web. 
+
+We model trophic interactions, a form of `Selection`, using the built-in type `YodzisInnes` describing the functional response between organisms as a function of their allometry proposed in Yodzis & innes 1992. We model dispersal as diffusion between locations. 
+
+
+
+
+in the form of allometric scaling functional response. We create a
 landscape with 30 locations with `Dispersal` between them, with dispersal
 distance also scaling with allometry. We then add a `Drift` model of local
 demographic stochasticity in the form of density dependent Brownian motion (i.e.
@@ -154,3 +160,39 @@ to allow the mass of each species to evolve over time due to `Mutation`,
 `Selection` or `Drift`, both effecting the functional response dynamics, and
 eventually leading to `Speciation` if the distribution of masses for a single
 species splits.
+
+
+
+To do this, we would modify the above code to read
+
+```
+using VirtualEcologicalLaboratory
+using Distributions: Exponential
+
+using EcologicalNetworks: nichemodel, trophiclevels
+
+# set up species
+numspecies = 30
+meanconnectance = 0.15
+metaweb = nichemodel(30, 0.15)
+trophiclevs = trophiclevels(metaweb)
+masses = [generate(DynamicSpeciesTrait, s, 10.^(trophiclevs[s])) for s in species(metaweb) ]
+
+# setup locations
+numpopulations = 50
+populations = generate(PoissonProcess, numpopulations)
+
+# setup model  
+model = Eating(functional_response=YodzisInnes(masses)) +   # density dependent biotic selection
+        DiffusionDispersal(ibd=AllometricIBD(masses)) +     # allometric scaling dispersal distance
+        DensityDependentBrownianMotion(0.3) +                # density dependent drift
+        Drift(masses) +            # a model dscribiing how local masses change from timestep to timestep
+        QuantileSpeciation(0.95, mass) +    # speciation occurs if a given local species is outside of the 95% normal est of species mass
+
+
+# memory allocation
+ntimesteps = 500
+traj = Trajectory(Biomass, metaweb, landscape, ntimesteps)
+simulate!(model, metaweb, landscape, traj)
+
+```

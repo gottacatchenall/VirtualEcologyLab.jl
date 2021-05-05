@@ -1,22 +1,4 @@
 
-"""
-Population
-
-TODO
-"""
-struct Location
-coordinate::Vector{Float64}
-end
-
-"""
-Metapopulation
-
-TODO
-"""
-struct LocationSet <: AbstractLocationSet
-populations::Vector{Location}
-end
-
 
 """
 Location()
@@ -31,6 +13,11 @@ LocationSet()
 Constructs a Metapopulation.
 """
 LocationSet(;numlocations::Int=10) = LocationSet([Location() for p in 1:numlocations])
+
+Base.length(ls::LocationSet) = length(ls.locations)
+Base.size(ls::LocationSet) = length(ls.locations)
+
+numlocations(ls::LocationSet) = size(ls)
 
 
 struct PoissonProcess <: AbstractLocationSetGenerator end

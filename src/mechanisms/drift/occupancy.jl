@@ -1,8 +1,8 @@
-struct StochasticColonization <: AbstractDispersalModel
+struct StochasticColonization{Occupancy} <: AbstractDriftModel{Occupancy}
     C::Float64
 end
 
-function simulate(mechanism::StochasticColonization, old_state::AbstractState, new_state::AbstractState)
+function simulate(mechanism::StochasticColonization, old_state::SingletonState, new_state::SingletonState)
     locs = locations(old_state)
     specs = species(old_state)
 
@@ -20,3 +20,4 @@ struct IncidenceFunctionColonization <: AbstractDispersalModel
     α::Float64
     kernel::Function
 end
+

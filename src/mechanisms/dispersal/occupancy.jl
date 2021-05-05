@@ -1,22 +1,15 @@
-struct StochasticColonization <: AbstractDispersalModel
+struct StochasticColonization{Occupancy} <: AbstractDispersalModel{Occupancy}
     C::Float64
 end
 
-function simulate(mechanism::StochasticColonization, old_state::AbstractState, new_state::AbstractState)
-    locs = locations(old_state)
-    specs = species(old_state)
-
-    for s in specs
-        for l in locs
-            this_state = state(old_state, l, s)
-            occ = isoccupied(old_state, l, s)
-        end
-    end
-
+function simulate(mechanism::StochasticColonization, old_state::SingletonState, new_state::SingletonState)
+    C = mechanism.C 
+    occupied(old_state) ? new_state = 1 : new_state = rand(Bernoulli(C))
 end
 
-struct IncidenceFunctionColonization <: AbstractDispersalModel
+struct IncidenceFunctionColonization <: AbstractDispersalModel{Occupancy}
     C::Float64
     α::Float64
     kernel::Function
 end
+
