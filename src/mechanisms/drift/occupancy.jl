@@ -1,15 +1,15 @@
-struct StochasticColonization{Occupancy} <: AbstractDriftModel{Occupancy}
-    C::Float64
+struct StochasticExtinction{Occupancy} <: AbstractDriftModel{Occupancy}
+    E::Float64
 end
 
-function simulate(mechanism::StochasticColonization, old_state::SingletonState, new_state::SingletonState)
-    locs = locations(old_state)
-    specs = species(old_state)
+function simulate(mechanism::StochasticExtinction, oldstate::State{Occupancy}, newstate::State{Occupancy})
+    locs = locations(oldstate)
+    specs = species(oldstate)
 
     for s in specs
         for l in locs
-            this_state = state(old_state, l, s)
-            occ = isoccupied(old_state, l, s)
+            this_state = state(oldstate, l, s)
+            occ = isoccupied(oldstate, l, s)
         end
     end
 

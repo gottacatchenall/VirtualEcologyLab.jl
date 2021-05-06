@@ -29,3 +29,16 @@ function simulate_timestep!(ves, oldstate, newstate)
         simulate!(mech, ves, oldstate, newstate)
     end
 end
+
+
+function iterateover!(
+    ::Type{SingletonState}, 
+    mechanism::AbstractMechanism,
+    ves::VirtualEcosystem, 
+    oldstate::State{T}, 
+    newstate::State{T}) where {T <: AbstractMeasurement}
+
+    for i in eachindex(oldstate)
+        simulate!(mech, ves, oldstate[i], newstate[i])
+    end
+end

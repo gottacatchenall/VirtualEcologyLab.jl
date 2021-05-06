@@ -27,12 +27,17 @@ module VirtualEcologyLab
     export Species, SpeciesPool, DiscreteSpeciesPool, DiscreteSepeciesPoolKpartite, ContinuousSpeciesPool, ContinuousSpeciesPoolKpartite
 
     include("mechanisms/combinemechanisms.jl")
+    
+
+    include("dynamics/state.jl")
+    export State, StateBundle, AbstractState, AbstractStateBundle
+    export states
+
     include("dynamics/virtualecosystem.jl")
     export VirtualEcosystem
-    
+
     include("dynamics/trajectory.jl")
-    export Trajectory, TrajectoryBundle, State, StateBundle
-    export AbstractState, AbstractStateBundle, AbstractTrajectory
+    export Trajectory, TrajectoryBundle, AbstractTrajectory
     export SingletonState, MetapopulationState, CommunityState, MetacommunityState
 
     include("mechanisms/dispersal/_dispersal.jl")
@@ -52,11 +57,11 @@ module VirtualEcologyLab
     include("landscapes/environment.jl")
     export PoissonProcess
 
-    export measurements
+    export measurement, measurements
 
 
     include("dynamics/simulate.jl")
-
+    export iterateover!
 
     export StochasticColonization 
 
