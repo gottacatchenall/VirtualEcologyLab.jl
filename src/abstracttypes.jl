@@ -3,23 +3,61 @@
 
     Measurements
 """
+
+"""
+    AbstractMeasurement
+
+   The abstract supertype for all types of measurements.
+"""
 abstract type AbstractMeasurement end
 
+"""
+
+"""
 abstract type AbstractBiomassMeasurement <: AbstractMeasurement end
+
+"""
+    AbstractTraitMeasurements
+
+    The abstract supertype for all trait measurements. 
+"""
 abstract type AbstractTraitMeasurement <: AbstractMeasurement end
+
+"""
+    AbstractEnvironmentalMeasurement
+"""
 abstract type AbstractEnvironmentMeasurement <: AbstractMeasurement  end
 
+"""
+    Occupancy <: AbstractBiomassMeasurement
 
+    A concrete type that describes whether a species is 
+    present or absent at a given Location and time.
+"""
 struct Occupancy <: AbstractBiomassMeasurement 
     value::Bool
 end 
 Base.zero(::Type{Occupancy}) = Occupancy(false)
 
+
+"""
+    Abundance <: AbstractBiomassMeasurement
+
+    A concrete type that holds the count of individuals
+    of a species present at a given Location and time
+"""
 struct Abundance <: AbstractBiomassMeasurement 
     value::Abundance
 end 
 Base.zero(::Type{Abundance}) = Abundance(0)
 
+
+"""
+    Biomass <: AbstractBiomassMeasurement
+
+    A concrete type that holds a continuous measurement of the 
+    mass of a species at a given Location and time
+"""
 struct Biomass <: AbstractBiomassMeasurement 
     value::Float64
 end 
@@ -31,14 +69,25 @@ Base.zero(::Type{Biomass}) = Biomass(0.)
 
     Mechanisms
 """
+
+"""
+    AbstractMechanism
+
+    The abstract supertype for all mechanisms.
+"""
 abstract type AbstractMechanism end
 abstract type AbstractGlobalMechanism <: AbstractMechanism end
 abstract type AbstractLocalMechanism <: AbstractMechanism end 
 
-abstract type AbstractDriftModel{T} <: AbstractLocalMechanism end
-abstract type AbstractSpeciationModel{T} <: AbstractGlobalMechanism end
-abstract type AbstractDispersalModel{T} <: AbstractGlobalMechanism end
-abstract type AbstractMutationModel{T} <: AbstractLocalMechanism end
+"""
+    AbstractDriftModel{T <: AbstractMeasurement} <: AbstractLocalMechanism
+
+    Abstract supertype for all drift models
+"""
+abstract type AbstractDriftModel{T <: AbstractMeasurement} <: AbstractLocalMechanism end
+abstract type AbstractSpeciationModel{T <: AbstractMeasurementT} <: AbstractGlobalMechanism end
+abstract type AbstractDispersalModel{T <: AbstractMeasurement} <: AbstractGlobalMechanism end
+abstract type AbstractMutationModel{T <: AbstractMeasurementT} <: AbstractLocalMechanism end
 
 abstract type AbstractSelectionModel{T} <: AbstractLocalMechanism end
 abstract type AbstractBioticSelectionModel{T} <: AbstractSelectionModel{T} end
