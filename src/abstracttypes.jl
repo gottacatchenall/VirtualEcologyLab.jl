@@ -11,14 +11,17 @@ abstract type AbstractEnvironmentMeasurement <: AbstractMeasurement  end
 
 
 struct Occupancy <: AbstractBiomassMeasurement 
+    value::Bool
 end 
-Base.zero(::Type{Occupancy}) = Occupancy(0)
+Base.zero(::Type{Occupancy}) = Occupancy(false)
 
 struct Abundance <: AbstractBiomassMeasurement 
+    value::Abundance
 end 
 Base.zero(::Type{Abundance}) = Abundance(0)
 
 struct Biomass <: AbstractBiomassMeasurement 
+    value::Float64
 end 
 Base.zero(::Type{Biomass}) = Biomass(0.)
 
@@ -86,11 +89,11 @@ end
 """
 abstract type AbstractMetaweb end
 
-struct Species end 
+abstract type  AbstractSpecies end 
 
-struct SpeciesPool 
-    species::Vector{Species}
-end
+struct Species <: AbstractSpecies end 
+
+abstract type AbstractSpeciesPool end
 
 
 """
@@ -119,6 +122,7 @@ struct MetacommunityState{T <: AbstractMeasurement} <: AbstractState
 end 
 
 abstract type AbstractStateBundle end # set of multiple states (i.e. biomass and a trait value), which are used together for a given model 
+abstract type AbstractTrajectoryBundle end
 abstract type AbstractTrajectory end
 
 

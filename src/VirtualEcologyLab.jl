@@ -20,27 +20,26 @@ module VirtualEcologyLab
     export Occupancy, Abundance, Biomass
     export DiscreteTrait, ContinuousTrait
 
-    export AbstractMetaweb 
-    export Species, SpeciesPool
+    include("species/speciespool.jl")
+    include("species/metaweb.jl")
 
+    export AbstractMetaweb 
+    export Species, SpeciesPool, DiscreteSpeciesPool, DiscreteSepeciesPoolKpartite, ContinuousSpeciesPool, ContinuousSpeciesPoolKpartite
+
+    include("mechanisms/combinemechanisms.jl")
+    include("dynamics/virtualecosystem.jl")
+    export VirtualEcosystem
+    
+    include("dynamics/trajectory.jl")
+    export Trajectory, TrajectoryBundle, State, StateBundle
     export AbstractState, AbstractStateBundle, AbstractTrajectory
     export SingletonState, MetapopulationState, CommunityState, MetacommunityState
 
-    include("mechanisms/combinemechanisms.jl")
-
     include("mechanisms/dispersal/_dispersal.jl")
     include("mechanisms/dispersal/occupancy.jl")
-
-
     include("mechanisms/drift/_drift.jl")
-
-
     include("mechanisms/selection/_selection.jl")
-
-
     include("mechanisms/mutation/_mutation.jl")
-
-
     include("mechanisms/speciation/_speciation.jl")
 
 
@@ -51,19 +50,10 @@ module VirtualEcologyLab
     include("landscapes/landscape.jl")
     include("landscapes/locations.jl")
     include("landscapes/environment.jl")
-
-
     export PoissonProcess
 
-    include("species/metaweb.jl")
-    export SpeciesList
-
-    include("dynamics/virtualecosystem.jl")
-    export VirtualEcosystem
     export measurements
 
-    include("dynamics/trajectory.jl")
-    export Trajectory, TrajectoryAssemblage
 
     include("dynamics/simulate.jl")
 
@@ -73,8 +63,10 @@ module VirtualEcologyLab
     export species, locations, times
     export numspecies, numlocations, numtimes
 
+    export timestep
+
     export generate 
-    export simulate
+    export simulate, simulate!, simulate_timestep!, simulate_trajectory, simulate_trajectory!
 
 end # module
 

@@ -1,4 +1,4 @@
-function simulate(mechanism::AbstractDriftModel, old_state, new_state)
+function simulate!(mechanism::AbstractDriftModel, old_state, new_state)
     # drift is independent of location and other species 
     locs = locations(old_state)
     specs = species(old_state)

@@ -18,12 +18,12 @@ function Trajectory(t::Type{T}, ntimesteps::Int, ves::VirtualEcosystem) where {T
     return Trajectory(t, ns,nl,ntimesteps)
 end
 
-struct TrajectoryAssemblage{OT <: AbstractMeasurement}
-    trajectories::Vector{Trajectory{OT}}
+struct TrajectoryBundle
+    trajectories::Vector{Trajectory}
 end
 
 
-function TrajectoryAssemblage(ves, ntimesteps)
+function TrajectoryBundle(ves, ntimesteps)
     meas = measurements(ves)
     trajs = []
 
@@ -31,7 +31,7 @@ function TrajectoryAssemblage(ves, ntimesteps)
         traj = Trajectory(m, ntimesteps, ves)
         push!(trajs, traj)
     end
-    return TrajectoryAssemblage(trajs)
+    return TrajectoryBundle(trajs)
 end
 
 # nothing to see here...
@@ -39,3 +39,27 @@ species(t::Trajectory) = t[1:length(t[:,1,1]), :, :]
 locations(t::Trajectory) = t[:,1:length(t[1,:,1]), :]
 times(t::Trajectory) = t[:,:,1:length(t[1,1,:])]
 
+numlocations(t::Trajectory) = length(locations(t))
+numspecies(t::Trajectory) = length(species(t))
+numtimes(t::Trajectory) = length(times(t))
+
+numlocations(t::TrajectoryBundle) = numlocations(t[1])
+numspecies(t::TrajectoryBundle) = numspecies(t[1])
+numtimes(t::TrajectoryBundle) = numtimes(t[1])
+
+
+
+struct State{MT <: AbstractMeasurement} <: AbstractState
+    ptr::Array{MT}
+end 
+
+struct StateBundle
+    states::Vector{State}
+end
+
+trajectories(t::TrajectoryBundle) = t.trajectories
+Base.getindex(t::TrajectoryBundle, i::Int) = (trajectories(t))[i]
+
+
+timestep(traj::Trajectory, time::Int) = times(traj)[:,:,time]
+timestep(traj::TrajectoryBundle, time::Int64) = StateBundle([State(timestep(tr, time)) for tr in trajectories(traj)])

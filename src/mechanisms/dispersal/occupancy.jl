@@ -2,10 +2,23 @@ struct StochasticColonization{Occupancy} <: AbstractDispersalModel{Occupancy}
     C::Float64
 end
 
-function simulate(mechanism::StochasticColonization, old_state::SingletonState, new_state::SingletonState)
-    C = mechanism.C 
-    occupied(old_state) ? new_state = 1 : new_state = rand(Bernoulli(C))
+function simulate!(mechanism::StochasticColonization, ves::VirtualEcosystem, old_state::State, new_state::State)
+    # iterate over singlestons
+    oldstate .= newstate
+    for s in species(ves)
+        for l in locations(ves)
+            oldsingleton = oldstate[s,l]
+            if !oldsingleton & rand(Bernoulli(mechanism.C))
+                newstate[s,l] = true
+            end         
+        end
+    end
 end
+
+function simulate!(mechanism::StochasticColonization, old_state::SingletonState, new_state::SingletonState)
+   
+end
+
 
 struct IncidenceFunctionColonization <: AbstractDispersalModel{Occupancy}
     C::Float64

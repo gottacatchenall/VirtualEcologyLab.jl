@@ -4,7 +4,7 @@
 
 struct VirtualEcosystem
     locations::LocationSet
-    speciespool::SpeciesPool
+    speciespool::AbstractSpeciesPool
     mechanisms::MechanismAssemblage
 end
 
