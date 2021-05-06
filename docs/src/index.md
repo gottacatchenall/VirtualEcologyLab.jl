@@ -51,11 +51,12 @@ particular location. The two broad categories of `Abiotic` measurements are
 
 A **state** is set of **measurements** that describes an ecological system.
 
-- `SingletonState`: A measurement corresponding to a single species at a single location and time. (For 1D measurements, a scalar)
-- `MetapopulationState`: A measurement corresponding to a single species across spatial locations. (For
+```@docs SingletonState```: A measurement corresponding to a single species at a single location and time. (For 1D measurements, a scalar)
+
+```@docs MetapopulationState```: A measurement corresponding to a single species across spatial locations. (For
   1D measurements, a vector)
-- `CommunityState`: A measurement corresponding to a set of species in one location (For 1D measurements, a vector)
-- `MetacommunityState`: A measurement corresponding to a set of species across spatial locations (For 1D measurements, a
+```@docs CommunityState```: A measurement corresponding to a set of species in one location (For 1D measurements, a vector)
+```@docs MetacommunityState```: A measurement corresponding to a set of species across spatial locations (For 1D measurements, a
   matrix)
 
 States of different types of measurements can be grouped to create
