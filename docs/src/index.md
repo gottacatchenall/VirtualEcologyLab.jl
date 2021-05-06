@@ -34,11 +34,13 @@ can be written down. Within `VEL`, measurements are split into two types:
 `Biotic` measurements correspond to things measuremed about living things. At
 the moment, the types of `Biotic` measurements are:
 
-- `Biomass` (represented as a `Float64`)
-- `Abundance` (an `Int`)
-- `Occupancy` (a `Bool`)
-- `ContinuousTrait` (a `Float64`)
-- `DiscreteTrait` (a set of `symbols` that form a dictionary)
+```@docs
+Biomass
+Abundance
+Occupancy
+ContinuousTrait
+DiscreteTrait
+```
 
 `Abiotic` measurements correspond to the environmental conditions at a
 particular location. The two broad categories of `Abiotic` measurements are
