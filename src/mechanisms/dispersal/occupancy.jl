@@ -5,11 +5,15 @@ end
 function simulate!(mechanism::StochasticColonization, ves::VirtualEcosystem, old_state::State, new_state::State)
     # iterate over singlestons
     oldstate .= newstate
+
+    oldocc = occupancy(old_state)
+    newocc = occupancy(new_state)
+
     for s in species(ves)
         for l in locations(ves)
-            oldsingleton = oldstate[s,l]
+            oldsingleton = oldocc[s,l]
             if !oldsingleton & rand(Bernoulli(mechanism.C))
-                newstate[s,l] = true
+                newocc[s,l] = true
             end         
         end
     end

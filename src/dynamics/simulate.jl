@@ -25,8 +25,6 @@ the primary dispatch for mechanisms
 """
 function simulate_timestep!(ves, oldstate, newstate)
 
-    # make sure each mechanism corresponds with state
-
     for mech in mechanisms(ves)
         simulate!(mech, ves, oldstate, newstate)
     end
