@@ -49,14 +49,6 @@ numtimes(t::TrajectoryBundle) = numtimes(t[1])
 
 
 
-struct State{MT <: AbstractMeasurement} <: AbstractState
-    ptr::Array{MT}
-end 
-
-struct StateBundle
-    states::Vector{State}
-end
-
 trajectories(t::TrajectoryBundle) = t.trajectories
 Base.getindex(t::TrajectoryBundle, i::Int) = (trajectories(t))[i]
 
