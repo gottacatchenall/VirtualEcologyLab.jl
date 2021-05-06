@@ -12,7 +12,10 @@
 abstract type AbstractMeasurement end
 
 """
+    AbstractBiomassMeasurement <: AbstractMeasurement
 
+    Abstract supertype for all measurements that describe the occurence of 
+    species at a particular Location and time.
 """
 abstract type AbstractBiomassMeasurement <: AbstractMeasurement end
 
@@ -85,9 +88,9 @@ abstract type AbstractLocalMechanism <: AbstractMechanism end
     Abstract supertype for all drift models
 """
 abstract type AbstractDriftModel{T <: AbstractMeasurement} <: AbstractLocalMechanism end
-abstract type AbstractSpeciationModel{T <: AbstractMeasurementT} <: AbstractGlobalMechanism end
+abstract type AbstractSpeciationModel{T <: AbstractMeasurement} <: AbstractGlobalMechanism end
 abstract type AbstractDispersalModel{T <: AbstractMeasurement} <: AbstractGlobalMechanism end
-abstract type AbstractMutationModel{T <: AbstractMeasurementT} <: AbstractLocalMechanism end
+abstract type AbstractMutationModel{T <: AbstractMeasurement} <: AbstractLocalMechanism end
 
 abstract type AbstractSelectionModel{T} <: AbstractLocalMechanism end
 abstract type AbstractBioticSelectionModel{T} <: AbstractSelectionModel{T} end
