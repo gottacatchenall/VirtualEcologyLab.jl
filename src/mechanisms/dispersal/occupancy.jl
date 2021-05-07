@@ -5,25 +5,24 @@ end
 function simulate!(
     mechanism::StochasticColonization, 
     ves::VirtualEcosystem, 
-    oldstate::StateBundle, 
-    newstate::StateBundle)
-    
-    oldocc = occupancy(oldstate)
-    newocc = occupancy(newstate)
+    oldstate::Array{Occupancy,2}, 
+    newstate::Array{Occupancy,2})
 
     # this is where you would parallelize
-    iterateover!(SingletonState,  mechanism, ves, oldocc, newocc) 
+    iterateover!(SingletonState,  mechanism, ves, oldstate, newstate) 
 end
 
 function simulate!(
     mech::StochasticColonization, 
     ves::VirtualEcosystem, 
-    oldstate::SingletonState, 
-    newstate::SingletonState)
+    oldstate::Occupancy, 
+    newstate::Occupancy)
 
-    c = mechanism.C
+    c = mech.C
 
     if unoccupied(oldstate) && rand(Bernoulli(c))
-        newstate = true
+        @show "attempting assignment "
+        set!(newstate, true)
+        @show newstate
     end
 end

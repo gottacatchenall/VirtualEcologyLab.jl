@@ -37,11 +37,16 @@ abstract type AbstractEnvironmentMeasurement <: AbstractMeasurement  end
     A concrete type that describes whether a species is 
     present or absent at a given Location and time.
 """
-struct Occupancy <: AbstractBiomassMeasurement 
+mutable struct Occupancy <: AbstractBiomassMeasurement 
     value::Bool
 end 
 Base.zero(::Type{Occupancy}) = Occupancy(false)
+set!(o::Occupancy, val::Bool) = begin 
+    o.value = val
+end
 
+occupied(o::Occupancy) = o.value
+unoccupied(o::Occupancy) = !o.value
 
 """
     Abundance <: AbstractBiomassMeasurement
@@ -49,7 +54,7 @@ Base.zero(::Type{Occupancy}) = Occupancy(false)
     A concrete type that holds the count of individuals
     of a species present at a given Location and time
 """
-struct Abundance <: AbstractBiomassMeasurement 
+mutable struct Abundance <: AbstractBiomassMeasurement 
     value::Abundance
 end 
 Base.zero(::Type{Abundance}) = Abundance(0)
@@ -61,7 +66,7 @@ Base.zero(::Type{Abundance}) = Abundance(0)
     A concrete type that holds a continuous measurement of the 
     mass of a species at a given Location and time
 """
-struct Biomass <: AbstractBiomassMeasurement 
+mutable struct Biomass <: AbstractBiomassMeasurement 
     value::Float64
 end 
 Base.zero(::Type{Biomass}) = Biomass(0.)

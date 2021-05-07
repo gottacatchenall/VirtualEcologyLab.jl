@@ -1,6 +1,6 @@
 module VirtualEcologyLab
     #using EcoSISTEM
-    using Distributions: Distribution, Uniform, Exponential, Normal
+    using Distributions: Distribution, Bernoulli, Uniform, Exponential, Normal
 
 
     include("abstracttypes.jl")
@@ -18,6 +18,8 @@ module VirtualEcologyLab
     export AbstractBiomassMeasurement, AbstractTraitMeasurement, AbstractEnvironmentalVariable
 
     export Occupancy, Abundance, Biomass
+    export occupied, unoccupied
+
     export DiscreteTrait, ContinuousTrait
 
     include("species/speciespool.jl")
@@ -72,7 +74,7 @@ module VirtualEcologyLab
 
     export generate 
     export simulate, simulate!, simulate_timestep!, simulate_trajectory, simulate_trajectory!
-
+    export set!
 end # module
 
 

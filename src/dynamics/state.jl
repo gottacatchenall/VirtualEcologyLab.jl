@@ -25,3 +25,7 @@ Base.length(sb::StateBundle) = length(states(sb))
 Base.iterate(sb::StateBundle) = Base.iterate(states(sb))
 Base.iterate(sb::StateBundle, i::Int) = Base.iterate(states(sb), i)
 
+Base.eachindex(s::State) = Base.eachindex(s.ptr)
+
+
+Base.getindex(s::State, i::Int) = Base.getindex(s.ptr, i)

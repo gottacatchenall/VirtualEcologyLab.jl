@@ -1,12 +1,14 @@
 using VirtualEcologyLab
+using Profile
+using ProfileView   
+using Revise
 
 
-sp = DiscreteSpeciesPool(10)
-locs = generate(PoissonProcess, 10)
+species = DiscreteSpeciesPool(10)
+locations = generate(PoissonProcess, 10)
 models = StochasticColonization{Occupancy}(0.3)
 
-ves = VirtualEcosystem(locs, sp, models)
+ves = VirtualEcosystem(locations, species, models)
 
-
-traj = simulate_trajectory(ves)
+@time tr = simulate_trajectory(ves)
 
