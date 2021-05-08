@@ -29,11 +29,7 @@ module VirtualEcologyLab
     export Species, SpeciesPool, DiscreteSpeciesPool, DiscreteSepeciesPoolKpartite, ContinuousSpeciesPool, ContinuousSpeciesPoolKpartite
 
     include("mechanisms/combinemechanisms.jl")
-    
 
-    include("dynamics/state.jl")
-    export State, StateBundle, AbstractState, AbstractStateBundle
-    export states
 
     include("dynamics/virtualecosystem.jl")
     export VirtualEcosystem
@@ -43,16 +39,18 @@ module VirtualEcologyLab
     export SingletonState, MetapopulationState, CommunityState, MetacommunityState
 
     include("mechanisms/dispersal/_dispersal.jl")
-    include("mechanisms/dispersal/occupancy.jl")
+    include("mechanisms/dispersal/Diffusion.jl")
+    include("mechanisms/dispersal/IncidenceFunctionColonization.jl")
+    include("mechanisms/dispersal/RandomColonization.jl")
+    export RandomColonization, IncidenceFunctionColonization
+
     include("mechanisms/drift/_drift.jl")
+    include("mechanisms/drift/RandomExtinction.jl")
+    export RandomExtinction
+
     include("mechanisms/selection/_selection.jl")
     include("mechanisms/mutation/_mutation.jl")
     include("mechanisms/speciation/_speciation.jl")
-
-
-    include("observers/abundance_observers.jl")
-    include("observers/occupancy_observers.jl")
-    include("observers/trait_observers.jl")
 
     include("landscapes/landscape.jl")
     include("landscapes/locations.jl")
@@ -70,8 +68,12 @@ module VirtualEcologyLab
     export species, locations, times
     export numspecies, numlocations, numtimes
 
-    export timestep
+    include("summarystats/mean.jl")
+    export SummaryStat
+    export mean
 
+    export Time 
+    
     export generate 
     export simulate, simulate!, simulate_timestep!, simulate_trajectory, simulate_trajectory!
     export set!

@@ -31,45 +31,22 @@ abstract type AbstractTraitMeasurement <: AbstractMeasurement end
 """
 abstract type AbstractEnvironmentMeasurement <: AbstractMeasurement  end
 
-"""
-    Occupancy <: AbstractBiomassMeasurement
 
-    A concrete type that describes whether a species is 
-    present or absent at a given Location and time.
-"""
-mutable struct Occupancy <: AbstractBiomassMeasurement 
-    value::Bool
-end 
-Base.zero(::Type{Occupancy}) = Occupancy(false)
-set!(o::Occupancy, val::Bool) = begin 
-    o.value = val
+
+
+# Declare the new type.
+primitive type Occupancy <: Integer 8 end
+Occupancy(x::Int) = reinterpret(Occupancy, Int8(x))
+Int(x::Occupancy) = reinterpret(Int8, x)
+Occupancy(x::Bool) = reinterpret(Occupancy, Int8(x))
+
+
+set!(x::Occupancy, v) = begin
+    x=v
 end
 
-occupied(o::Occupancy) = o.value
-unoccupied(o::Occupancy) = !o.value
-
-"""
-    Abundance <: AbstractBiomassMeasurement
-
-    A concrete type that holds the count of individuals
-    of a species present at a given Location and time
-"""
-mutable struct Abundance <: AbstractBiomassMeasurement 
-    value::Abundance
-end 
-Base.zero(::Type{Abundance}) = Abundance(0)
-
-
-"""
-    Biomass <: AbstractBiomassMeasurement
-
-    A concrete type that holds a continuous measurement of the 
-    mass of a species at a given Location and time
-"""
-mutable struct Biomass <: AbstractBiomassMeasurement 
-    value::Float64
-end 
-Base.zero(::Type{Biomass}) = Biomass(0.)
+primitive type Abundance <: Integer 32 end # does matching this with the architecture word size help?
+primitive type Biomass <: AbstractFloat 64 end 
 
 
 
@@ -92,10 +69,10 @@ abstract type AbstractLocalMechanism <: AbstractMechanism end
 
     Abstract supertype for all drift models
 """
-abstract type AbstractDriftModel{T <: AbstractMeasurement} <: AbstractLocalMechanism end
-abstract type AbstractSpeciationModel{T <: AbstractMeasurement} <: AbstractGlobalMechanism end
-abstract type AbstractDispersalModel{T <: AbstractMeasurement} <: AbstractGlobalMechanism end
-abstract type AbstractMutationModel{T <: AbstractMeasurement} <: AbstractLocalMechanism end
+abstract type AbstractDriftModel{T} <: AbstractLocalMechanism end
+abstract type AbstractSpeciationModel{T} <: AbstractGlobalMechanism end
+abstract type AbstractDispersalModel{T} <: AbstractGlobalMechanism end
+abstract type AbstractMutationModel{T} <: AbstractLocalMechanism end
 
 abstract type AbstractSelectionModel{T} <: AbstractLocalMechanism end
 abstract type AbstractBioticSelectionModel{T} <: AbstractSelectionModel{T} end
@@ -182,4 +159,6 @@ abstract type AbstractStateBundle end # set of multiple states (i.e. biomass and
 abstract type AbstractTrajectoryBundle end
 abstract type AbstractTrajectory end
 
+struct SummaryStat <: Function end
 
+struct Time <: AbstractMeasurement end 

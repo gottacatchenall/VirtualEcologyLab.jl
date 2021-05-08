@@ -11,13 +11,14 @@ end
 function simulate_trajectory!(ves, trajbundle::TrajectoryBundle)
     nt = numtimes(trajbundle[1])
     
+    mechs = mechanisms(ves)
+
     for t = 2:nt
-        for mech in mechanisms(ves)
+        for mech in mechs
             meas = measurement(mech)
             tensor = trajbundle[meas]
-            simulate!(mech, ves, tensor[t-1], tensor[t])
+            tensor[t] = simulate!(mech, tensor[t-1], tensor[t])
         end
-        
     end
 end
 
@@ -35,11 +36,13 @@ end
 function iterateover!(
     ::Type{SingletonState}, 
     mech::AbstractMechanism,
-    ves::VirtualEcosystem, 
     oldstate::Array{T,2}, 
-    newstate::Array{T,2}) where {T <: AbstractMeasurement}
+    newstate::Array{T,2}) where {T}
 
     for i in eachindex(oldstate)
-        simulate!(mech, ves, oldstate[i], newstate[i])
+        newstate[i] = simulate!(mech, oldstate[i], newstate[i])
     end
+
+    return newstate
 end
+

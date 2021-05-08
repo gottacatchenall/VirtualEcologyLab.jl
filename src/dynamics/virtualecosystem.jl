@@ -19,7 +19,6 @@ numspecies(ves) = length(species(ves))
 numlocations(ves::VirtualEcosystem) = size(locations(ves))
 
 
-measurement(a::T) where {V <: AbstractMeasurement, T <: AbstractDriftModel{V}} = V
-measurement(a::T) where {V <: AbstractMeasurement, T <: AbstractDispersalModel{V}} = V
-measurement(::State{V}) where {V <: AbstractMeasurement} = V
+measurement(a::T) where {V, T <: AbstractDriftModel{V}} = V
+measurement(a::T) where {V, T <: AbstractDispersalModel{V}} = V
 measurements(ves::VirtualEcosystem) = [measurement(mech) for mech in mechanisms(ves)]
