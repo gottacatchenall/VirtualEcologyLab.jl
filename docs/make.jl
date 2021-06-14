@@ -6,16 +6,6 @@ makedocs(
     modules=[VirtualEcologyLab],
     pages=[
         "Index" => "index.md",
-        "Interface" => [
-            "Types" => "interfaces/types.md",
-        ],
-        "Case Studies" => [
-            "Metapopulations" => "casestudies/metapopulation_models.md",
-        ],
-        "Library" => [
-            "Internal" => "lib/internal.md",
-            "Public API" => "lib/public.md",
-        ],
         ]
 )
 
