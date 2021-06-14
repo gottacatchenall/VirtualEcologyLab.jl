@@ -33,16 +33,3 @@ function simulate_timestep!(ves, oldstate, newstate)
 end
 
 
-function iterateover!(
-    ::Type{SingletonState}, 
-    mech::AbstractMechanism,
-    oldstate::Array{T,2}, 
-    newstate::Array{T,2}) where {T}
-
-    for i in eachindex(oldstate)
-        newstate[i] = simulate!(mech, oldstate[i], newstate[i])
-    end
-
-    return newstate
-end
-

@@ -25,7 +25,7 @@ function Trajectory(t::Type{T}, ntimesteps::Int, ves::VirtualEcosystem) where {T
     return Trajectory(t, ns,nl,ntimesteps)
 end
 
-Base.getindex(t::Trajectory{N}, a::Any, b::Any, c::Any) where {N <: AbstractMeasurement} = Base.getindex(t.data, a,b,c)
+Base.getindex(t::Trajectory{N}, a::Any, b::Any, c::Any) where {N} = Base.getindex(t.data, a,b,c)
 obstype(t::Trajectory{N}) where {N} = N
 measurement(t::Trajectory{N}) where {N} = N
 
@@ -40,6 +40,7 @@ function TrajectoryBundle(ves, ntimesteps)
     meas = measurements(ves)
     trajs = []
 
+    # have to make unique for each meausrement
     for m in meas 
         traj = Trajectory(m, ntimesteps, ves)
         push!(trajs, traj)
@@ -81,11 +82,10 @@ Base.getindex(trajbundle::TrajectoryBundle, mech::Type{T}) where {T} = begin
 end
 
 timestep(traj::Trajectory, time::Int) = times(traj)[:,:,time]
-timestep(traj::TrajectoryBundle, time::Int64) = StateBundle([State(timestep(tr, time)) for tr in trajectories(traj)])
 
 
 Base.iterate(trajbundle::TrajectoryBundle) = Base.iterate(trajectories(trajbundle))
 
 Base.iterate(trajbundle::TrajectoryBundle, i::Int) = Base.iterate(trajectories(trajbundle), i)
 
-Base.getindex(traj::Trajectory{Occupancy}, i::Int64) = traj[:,:,i]
+Base.getindex(traj::Trajectory{T}, i::Int64) where {T} = traj[:,:,i]
